@@ -1,0 +1,17 @@
+.tabs-container {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+
+  font-size: 17px;
+  font-weight: 700;
+  border-bottom: 1px solid #d1cece;
+}
+
+.dishes-container {
+  list-style-type: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

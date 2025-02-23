@@ -1,0 +1,12 @@
+.menu-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 14px;
+  font-weight: 600;
+}
+
+.active-tab {
+  color: rgb(243, 60, 35);
+  border-bottom: 1.5px solid rgb(243, 60, 35);
+}
