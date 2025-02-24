@@ -1,21 +1,45 @@
+import {Link, withRouter} from 'react-router-dom'
+import Cookies from 'js-cookie'
 import {IoCartOutline} from 'react-icons/io5'
+import CartContext from '../../context/CartContext'
 import './index.css'
 
 const Header = props => {
-  const {resturantDetails, cartQuantiy} = props
+  const {resturantDetails} = props
   const {restaurantName} = resturantDetails
+
+  const handleLogOut = () => {
+    const {history} = props
+
+    Cookies.remove('jwt_token')
+    history.push('/login')
+  }
+
   return (
-    <nav className="nav-bar">
-      <h1>{restaurantName}</h1>
-      <div className="orders-icons-con">
-        <p className="my-order-para">My Orders</p>
-        <div className="cart-container">
-          <IoCartOutline className="cart-icon" />
-          <p className="cart-quantity">{cartQuantiy}</p>
-        </div>
-      </div>
-    </nav>
+    <CartContext.Consumer>
+      {value => {
+        const {cartList} = value
+        return (
+          <nav className="nav-bar">
+            <Link to="/">
+              <h1>{restaurantName}</h1>
+            </Link>
+
+            <div className="orders-icons-con">
+              <p className="my-order-para">My Orders</p>
+              <Link to="/cart">
+                <button className="cart-container" type="button">
+                  <IoCartOutline className="cart-icon" />
+                  {cartList.length}
+                </button>
+              </Link>
+              <button onClick={handleLogOut}>Logout</button>
+            </div>
+          </nav>
+        )
+      }}
+    </CartContext.Consumer>
   )
 }
 
-export default Header
+export default withRouter(Header)

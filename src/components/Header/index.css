@@ -25,6 +25,8 @@
 .cart-container {
   position: relative;
   display: inline-block;
+  background-color: transparent;
+  border: none;
 }
 
 .cart-icon {
