@@ -7,14 +7,7 @@ import './index.css'
 const Home = () => (
   <CartContex.Consumer>
     {value => {
-      const {
-        tabList,
-        activeTabId,
-        restaurantDetails,
-        changeTabs,
-        incrementCartItemQuantity,
-        decrementCartItemQuantity,
-      } = value
+      const {tabList, activeTabId, restaurantDetails, changeTabs} = value
       const activeTabData = tabList.find(
         eachTab => eachTab.menuCategoryId === activeTabId,
       )
@@ -35,12 +28,7 @@ const Home = () => (
           </ul>
           <ul className="dishes-container">
             {filteredDishes.map(eachDish => (
-              <DishItem
-                key={eachDish.dishId}
-                dishDetails={eachDish}
-                incrementCartItemQuantity={incrementCartItemQuantity}
-                decrementCartItemQuantity={decrementCartItemQuantity}
-              />
+              <DishItem key={eachDish.dishId} dishDetails={eachDish} />
             ))}
           </ul>
         </>

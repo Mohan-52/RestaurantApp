@@ -16,6 +16,11 @@
 
 .dish-details {
   width: 60%;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 2;
+  padding: 1rem;
 }
 
 .add-remove-con {
@@ -35,4 +40,41 @@
   color: #fff;
   font-size: 25px;
   cursor: pointer;
+}
+
+.veg-img,
+.non-veg-img {
+  width: 30px;
+  align-self: flex-start;
+}
+
+.dishName {
+  color: #000;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.customization-para {
+  color: rgb(1, 1, 249);
+  font-weight: 600;
+}
+
+.dish-description {
+  color: rgb(137, 152, 168);
+}
+
+.add-to-cart-btn {
+  background-color: #186d05;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.calories-p {
+  color: rgb(227, 192, 18);
 }

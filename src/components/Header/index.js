@@ -21,19 +21,29 @@ const Header = props => {
         const {cartList} = value
         return (
           <nav className="nav-bar">
-            <Link to="/">
-              <h1>{restaurantName}</h1>
+            <Link to="/" className="styled-link">
+              <h1 className="restaurant-name">{restaurantName}</h1>
             </Link>
 
             <div className="orders-icons-con">
               <p className="my-order-para">My Orders</p>
               <Link to="/cart">
-                <button className="cart-container" type="button">
+                <button
+                  type="button"
+                  className="cart-container"
+                  data-testid="cart"
+                >
                   <IoCartOutline className="cart-icon" />
-                  {cartList.length}
                 </button>
+                <p className="cart-quantity">{cartList.length}</p>
               </Link>
-              <button onClick={handleLogOut}>Logout</button>
+              <button
+                type="button"
+                onClick={handleLogOut}
+                className="logout-btn"
+              >
+                Logout
+              </button>
             </div>
           </nav>
         )

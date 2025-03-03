@@ -2,17 +2,25 @@ import {useState} from 'react'
 import './index.css'
 import CartContext from '../../context/CartContext'
 
-const vegImg = 'https://ibb.co/B56gb517'
+const vegImg = () => (
+  <img
+    src="https://i.postimg.cc/YqYL4tgy/veg.png"
+    alt="veg-img"
+    className="veg-img"
+  />
+)
 
-const nonVegImg = 'https://ibb.co/fGkHsZgg'
+const nonVegImg = () => (
+  <img
+    src="https://i.postimg.cc/rsJmJwJ8/nnveg.png"
+    alt="non-veg"
+    className="non-veg-img"
+  />
+)
 
 const DishItem = props => {
-  const [eachQuant, setQuant] = useState(0)
-  const {
-    dishDetails,
-    incrementCartItemQuantity,
-    decrementCartItemQuantity,
-  } = props
+  const [quantity, setQuant] = useState(0)
+  const {dishDetails} = props
   const {
     addonCat,
     dishName,
@@ -24,17 +32,14 @@ const DishItem = props => {
     dishPrice,
     dishType,
     dishId,
-    quantity,
   } = dishDetails
 
   const handleIncrement = () => {
-    incrementCartItemQuantity(dishId)
     setQuant(prevState => prevState + 1)
   }
 
   const handleDecrement = () => {
-    decrementCartItemQuantity(dishId)
-    if (setQuant > 0) {
+    if (quantity > 0) {
       setQuant(prevState => prevState - 1)
     }
   }
@@ -44,14 +49,12 @@ const DishItem = props => {
       <button className="btn" onClick={handleDecrement} type="button">
         -
       </button>
-      {eachQuant}
+      {quantity}
       <button className="btn" onClick={handleIncrement} type="button">
         +
       </button>
     </div>
   )
-
-  const verOrNonVegUrl = dishType === 2 ? vegImg : nonVegImg
 
   return (
     <CartContext.Consumer>
@@ -59,28 +62,36 @@ const DishItem = props => {
         const {addCartItem} = value
 
         const handleAddtoCart = () => {
-          addCartItem(dishDetails)
+          addCartItem({...dishDetails, quantity})
           setQuant(0)
         }
 
         return (
           <li className="dish-card">
-            <img src={verOrNonVegUrl} alt="veg-or-non-img" />
             <div className="dish-details">
-              <p>{dishName}</p>
-              <p>
-                {dishCurrency} {dishPrice}
-              </p>
-              <p>{dishDescription}</p>
-              {dishAvailability ? cartAddOrRemove() : 'Not available'}
-              {quantity > 0 && (
-                <button type="button" onClick={handleAddtoCart}>
-                  Add to cart
-                </button>
-              )}
-              {addonCat.length !== 0 && <p>Customizations available</p>}
+              {dishType === 2 ? vegImg() : nonVegImg()}
+              <div>
+                <p className="dishName"> {dishName}</p>
+                <p>
+                  {dishCurrency} {dishPrice}
+                </p>
+                <p className="dish-description">{dishDescription}</p>
+                {dishAvailability ? cartAddOrRemove() : 'Not available'}
+                {quantity > 0 && (
+                  <button
+                    type="button"
+                    className="add-to-cart-btn"
+                    onClick={handleAddtoCart}
+                  >
+                    Add to cart
+                  </button>
+                )}
+                {addonCat.length !== 0 && (
+                  <p className="customization-para">Customizations available</p>
+                )}
+              </div>
             </div>
-            <p>{dishCalories} calories</p>
+            <p className="calories-p">{dishCalories} calories</p>
             <div>
               <img src={dishImage} alt="dishImg" className="dishImg" />
             </div>

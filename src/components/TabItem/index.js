@@ -9,8 +9,8 @@ const TabItem = props => {
   return (
     <li>
       <button
-        className={`menu-btn ${tabClsName}`}
         type="button"
+        className={`menu-btn ${tabClsName}`}
         onClick={() => changeTabs(menuCategoryId)}
       >
         {menuCategory}

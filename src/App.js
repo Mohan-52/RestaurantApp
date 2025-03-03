@@ -51,7 +51,6 @@ const App = () => {
           dishName: dish.dish_name,
           dishPrice: dish.dish_price,
           nextUrl: dish.nexturl,
-          quantity: 0,
         })),
         menuCategory: eachTab.menu_category,
         menuCategoryId: eachTab.menu_category_id,
@@ -68,6 +67,7 @@ const App = () => {
       setApiStatus(apiStatusConstants.failure)
     }
   }
+
   useEffect(() => {
     getRestaurantMenu()
   }, [])
@@ -82,7 +82,7 @@ const App = () => {
 
       if (isDishExist) {
         return prevState.map(eachDish =>
-          eachDish.id === dish.id
+          eachDish.dishId === dish.dishId
             ? {...eachDish, quantity: eachDish.quantity + dish.quantity}
             : eachDish,
         )
@@ -90,47 +90,35 @@ const App = () => {
       return [...prevState, dish]
     })
   }
+
   const removeCartItem = dishId => {
     setCartList(prevState =>
-      prevState.filter(eachDish => eachDish.id !== dishId),
+      prevState.filter(eachDish => eachDish.dishId !== dishId),
     )
   }
 
   const incrementCartItemQuantity = dishId => {
-    setTabList(prevTabList =>
-      prevTabList.map(eachTab => {
-        if (eachTab.menuCategoryId === activeTabId) {
-          return {
-            ...eachTab,
-            categoryDishes: eachTab.categoryDishes.map(eachDish =>
-              eachDish.dishId === dishId
-                ? {...eachDish, quantity: eachDish.quantity + 1}
-                : eachDish,
-            ),
-          }
+    setCartList(prevState =>
+      prevState.map(eachDish => {
+        if (eachDish.dishId === dishId) {
+          return {...eachDish, quantity: eachDish.quantity + 1}
         }
-        return eachTab
+
+        return eachDish
       }),
     )
   }
 
   const decrementCartItemQuantity = dishId => {
-    setTabList(prevState =>
-      prevState.map(eachTab => {
-        if (eachTab.menuCategoryId === activeTabId) {
-          return {
-            ...eachTab,
-            categoryDishes: eachTab.categoryDishes.map(eachDish => {
-              if (eachDish.dishId === dishId) {
-                return eachDish.quantity > 0
-                  ? {...eachDish, quantity: eachDish.quantity - 1}
-                  : eachDish
-              }
-              return eachDish
-            }),
+    setCartList(prevState =>
+      prevState.map(eachDish => {
+        if (eachDish.dishId === dishId) {
+          if (eachDish.quantity > 1) {
+            return {...eachDish, quantity: eachDish.quantity - 1}
           }
+          removeCartItem(dishId)
         }
-        return eachTab
+        return eachDish
       }),
     )
   }

@@ -1,0 +1,46 @@
+.empty-conatiner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.empty-img {
+  width: 300px;
+}
+
+.no-p {
+  color: rgb(91, 89, 89);
+  font-size: 20px;
+}
+
+.shop-btn {
+  background-color: blue;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+}
+
+.remove-all-btn {
+  background-color: red;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 15px;
+  margin: 10px;
+  align-self: flex-end;
+}
+
+.cart-conatiner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
